@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="get" action="users">
+    <input type="submit" value="戻る">
+</form>
+<form method="post" action="regist-user">
+    {% csrf-field %}
+    <table>
+        <tr>
+            <td>ユーザID：</td>
+            <td><input type="text" name="id" style="width:250px;" placeholder="ユーザIDを入力してください。" value="{{id}}">{{errors.id}}</td>
+        </tr>
+        <tr>
+            <td>パスワード：</td>
+            <td><input type="password" name="pass" style="width:250px;" placeholder="パスワードを入力してください。" value="{{pass}}">{{errors.pass}}</td>
+        </tr>
+        <tr>
+            <td>姓：</td>
+            <td><input type="text" name="last_name" style="width:250px;" placeholder="姓を入力してください。" value="{{last_name}}">{{errors.last_name}}</td>
+        </tr>
+        <tr>
+            <td>名：</td>
+            <td><input type="text" name="first_name" style="width:250px;" placeholder="名を入力してください。" value="{{first_name}}">{{errors.first_name}}</td>
+        </tr>
+        <tr>
+            <td>メールアドレス：</td>
+            <td><input type="text" name="email" style="width:250px;" placeholder="メールアドレスを入力してください。" value="{{email}}">{{errors.email}}</td>
+        </tr>
+    </table>
+    <input type="hidden" name="target-id" value="{{id}}">
+    <input type="submit" value="登録">
+</form>
+{% endblock %}

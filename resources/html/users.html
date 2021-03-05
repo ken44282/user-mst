@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+<form method="get" action="regist-user">
+    <input type="submit" value="新規登録">
+</form>
+<form method="get" action="users">
+    <table>
+        <tr>
+            <td>ユーザID：</td>
+            <td><input type="text" name="id" style="width:250px;" placeholder="ユーザIDを入力してください。" value="{{params.id}}"></td>
+        </tr>
+        <tr>
+            <td>姓：</td>
+            <td><input type="text" name="last_name" style="width:250px;" placeholder="姓を入力してください。" value="{{params.last_name}}"></td>
+        </tr>
+        <tr>
+            <td>名：</td>
+            <td><input type="text" name="first_name" style="width:250px;" placeholder="名を入力してください。" value="{{params.first_name}}"></td>
+        </tr>
+        <tr>
+            <td>メールアドレス：</td>
+            <td><input type="text" name="email" style="width:250px;" placeholder="メールアドレスを入力してください。" value="{{params.email}}"></td>
+        </tr>
+    </table>
+    <input type="submit" value="検索">
+</form>
+<table border="1">
+    <thead>
+    <tr>
+        <th width="100">ユーザID</th>
+        <th width="130">姓</th>
+        <th width="130">名</th>
+        <th width="200">メールアドレス</th>
+        <th></th>
+    </tr>
+    </thead>
+    {% for user in users %}
+    <tr>
+        <td>{{user.id}}</td>
+        <td>{{user.last_name}}</td>
+        <td>{{user.first_name}}</td>
+        <td>{{user.email}}</td>
+        <td>
+            <form method="get" action="regist-user" style="display:inline;">
+                <input type="hidden" name="id" value="{{user.id}}">
+                <input type="submit" value="変更">
+            </form>
+            <form method="post" action="delete-user" style="display:inline;">
+                {% csrf-field %}
+                <input type="hidden" name="id" value="{{user.id}}">
+                <input type="submit" value="削除">
+            </form>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
