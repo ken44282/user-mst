@@ -18,10 +18,10 @@ SELECT * FROM users
 (let [condition
      (->>
          (vector
-           (when (not (empty? (:id params))) "id = :id")
-           (when (not (empty? (:first_name params))) "first_name like '%' || :first_name || '%'")
-           (when (not (empty? (:last_name params))) "last_name like '%' || :last_name || '%'")
-           (when (not (empty? (:email params))) "email like '%' || :email || '%'"))
+           (when (:id params) "id = :id")
+           (when (:first_name params) "first_name like '%' || :first_name || '%'")
+           (when (:last_name params) "last_name like '%' || :last_name || '%'")
+           (when (:email params) "email like '%' || :email || '%'"))
          (remove nil?))]
      (if (empty? condition) nil (str " WHERE " (string/join " AND " condition))))
 ~*/
